@@ -9,10 +9,10 @@
 class User{
     private $dbHost     = "localhost";
     private $dbUsername = "root";
-    private $dbPassword = "";
-    private $dbName     = "codexworld";
+    private $dbPassword = "root";
+    private $dbName     = "testb";
     private $userTbl    = "users";
-    
+
     public function __construct(){
         if(!isset($this->db)){
             // Connect to the database
@@ -24,7 +24,7 @@ class User{
             }
         }
     }
-    
+
     /*
      * Returns rows from the database based on the conditions
      * @param string name of the table
@@ -43,19 +43,19 @@ class User{
                 $i++;
             }
         }
-        
+
         if(array_key_exists("order_by",$conditions)){
-            $sql .= ' ORDER BY '.$conditions['order_by']; 
+            $sql .= ' ORDER BY '.$conditions['order_by'];
         }
-        
+
         if(array_key_exists("start",$conditions) && array_key_exists("limit",$conditions)){
-            $sql .= ' LIMIT '.$conditions['start'].','.$conditions['limit']; 
+            $sql .= ' LIMIT '.$conditions['start'].','.$conditions['limit'];
         }elseif(!array_key_exists("start",$conditions) && array_key_exists("limit",$conditions)){
-            $sql .= ' LIMIT '.$conditions['limit']; 
+            $sql .= ' LIMIT '.$conditions['limit'];
         }
-        
+
         $result = $this->db->query($sql);
-        
+
         if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
             switch($conditions['return_type']){
                 case 'count':
@@ -76,7 +76,7 @@ class User{
         }
         return !empty($data)?$data:false;
     }
-    
+
     /*
      * Insert data into the database
      * @param string name of the table
